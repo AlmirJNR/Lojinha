@@ -1,6 +1,5 @@
 package lojinha;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -54,85 +53,20 @@ public class app {
         ArrayList<produtos> itensVendidos = new ArrayList<>();
 
         // -> Simualação de Compra 1
-        Venda(comprador1, compradores, mercadoria1, itensVendidos);
+        venda.Venda(comprador1, compradores, mercadoria1, itensVendidos);
 
         // -> Adicionando os objetos para um ArrayList ==> Observe como se aplica dentro do método
         // compradores.add(comprador1);
         // itensVendidos.add(mercadoria1);
 
         // -> Simualação de Compra 2
-        Venda(comprador2, compradores, mercadoria2, itensVendidos);
+        venda.Venda(comprador2, compradores, mercadoria2, itensVendidos);
 
         // -> Adicionando os objetos para um ArrayList ==> Observe como se aplica dentro do método
         // compradores.add(comprador2);
         // itensVendidos.add(mercadoria2);
 
         // -> Mostrará uma lista de vendas efetuadas no final do dia
-        ListaVendas(compradores, itensVendidos);
-    }
-
-    // -> Irá retornar os produtos comprados e o valor total da compra para o cliente
-    private static PrintStream Venda(cli_fis clienteX, ArrayList<cli_fis> listaClientes, produtos mercadoriaX, ArrayList<produtos> listaMercadorias){
-        long cpfCliente = clienteX.getCpf();
-        String nomeCliente = clienteX.getNome();
-        String emailCliente = clienteX.getEmail();
-        
-        String nomeMercadoria = mercadoriaX.getNome();
-        double valorMercadoria = mercadoriaX.getValor();
-        int quantComprada = mercadoriaX.getQntComprada();
-        int quantEstoqMercadoria = mercadoriaX.getQntEstoque();
-
-        if (mercadoriaX.getQntEstoque() - quantComprada > 0) {
-            System.out.printf("%n%ncomprando...%n%n");
-        }
-        else{
-            return System.out.printf("indisponível no estoque") ;
-        }
-
-        // -> Informação visual para o cliente
-        System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CPF: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
-        , nomeCliente, nomeMercadoria, valorMercadoria, cpfCliente, emailCliente);
-
-        // -> Retirando do estoque a unidade comprada
-        mercadoriaX.setQntEstoque(quantEstoqMercadoria - quantComprada);
-
-        // -> Adicionando comprador a lista de compradores do dia
-        listaClientes.add(clienteX);
-
-        // -> Adicionando itens vendidos a lista de vendas do dia
-        listaMercadorias.add(mercadoriaX);
-
-        return System.out.printf("Obrigado e volte sempre");
-    }
-
-    // -> Irá retornar uma lista de vendas do dia
-    private static void ListaVendas(ArrayList<cli_fis> listaClientes, ArrayList<produtos> listaMercadorias){
-        // -> variável local para calculo de lucro do dia
-        double lucroTotal = 0;
-
-        for (int i = 0; i < listaMercadorias.size(); i++) {
-            // -> Melhor formatação para a apresetação final dos dados
-            if (i < listaMercadorias.size() - 1) {
-                System.out.printf("%n%n");
-            }
-
-            System.out.printf("<-- Compra %d do dia -->%n", i+1);
-
-            // -> Mostrando qual cliente comprou qual produto e a quantidade de lucro fornecida
-            System.out.printf("O cliente " + listaClientes.get(i).getNome() + 
-            ", comprou %d unidades de: " + listaMercadorias.get(i).getNome() + "%nCom lucro de: %.2f", 
-            listaMercadorias.get(i).getQntComprada(), 
-            (listaMercadorias.get(i).getValor() * listaMercadorias.get(i).getQntComprada()));
-
-            // -> Melhor formatação para a apresetação final dos dados
-            if (i < listaMercadorias.size() - 1) {
-                System.out.println("");
-            }
-
-            // -> Realizando o lucro total para demonstar no final da lista
-            lucroTotal += listaMercadorias.get(i).getValor() * listaMercadorias.get(i).getQntComprada();
-        }
-
-        System.out.printf("%n%nO lucro do dia foi: %.2f", lucroTotal);
+        venda.ListaVendas(compradores, itensVendidos);
     }
 }
