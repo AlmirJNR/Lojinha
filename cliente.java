@@ -1,10 +1,10 @@
 package lojinha;
 
 public class cliente {
-    String nome = "";
-    long telefone = 0;
-    String email = "";
-    String endereço = "";
+    private String nome = "";
+    private long telefone = 0;
+    private String email = "";
+    private String endereço = "";
 
     //<- Nome ->
     public void setNome(String nome) {

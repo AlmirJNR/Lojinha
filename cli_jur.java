@@ -1,8 +1,8 @@
 package lojinha;
 
 public class cli_jur extends cliente{
-    long cnpj = 0;
-    String nomeFantasia = "";
+    private long cnpj = 0;
+    private String nomeFantasia = "";
 
     //<- CNPJ ->
     public void setCnpj(long cnpj) {

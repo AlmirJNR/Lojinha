@@ -1,11 +1,11 @@
 package lojinha;
 
 public class produtos {
-    long codigo = 0;
-    String nome = "";
-    double valor = 0;
-    int qntComprada = 0;
-    int qntEstoque = 0;
+    private long codigo = 0;
+    private String nome = "";
+    private double valor = 0;
+    private int qntComprada = 0;
+    private int qntEstoque = 0;
 
     //<- Codigo ->
     public void setCodigo(long codigo) {
