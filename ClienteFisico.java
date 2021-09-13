@@ -4,9 +4,7 @@ public class ClienteFisico extends Cliente{
     private long cpf = 0;
 
     //Este é um construtor padrão
-    ClienteFisico(){
-
-    }
+    ClienteFisico() {}
     
     //Este é um construtor completo
     ClienteFisico(String nome, long cpf, Telefone telefone, String email, Endereco endereco){

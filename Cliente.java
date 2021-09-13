@@ -2,10 +2,8 @@ package lojinha;
 
 public class Cliente {
     private String nome;
-    // private long telefone = 0;
     private Telefone telefone;
     private String email;
-    // private String endereco;
     private Endereco endereco;
 
     //Este é um construtor padrão
@@ -26,14 +24,6 @@ public class Cliente {
     public String getNome() {
         return nome;
     }
-
-    // //<- Telefone Atributo ->
-    // public void setTelefone(long telefone) {
-    //     this.telefone = telefone;
-    // }
-    // public long getTelefone() {
-    //     return telefone;
-    // }
 
     //<- Telefone Classe ->
     public void setTelefone(int telefoneDDD, long telefoneNumero) {
@@ -57,14 +47,6 @@ public class Cliente {
     public String getEmail() {
         return email;
     }
-
-    // //<- Endereço Atributo ->
-    // public void setEndereço(String endereço) {
-    //     this.endereco = endereço;
-    // }
-    // public String getEndereço() {
-    //     return endereco;
-    // }
 
     // <- Endereço Classe ->
     public void setEnderecoCasa(String enderecoPais, String enderecoEstado, String enderecoCidade, String enderecoBairro, String enderecoRua, int enderecoNumeroLogradouro) {

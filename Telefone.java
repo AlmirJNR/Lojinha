@@ -5,7 +5,7 @@ public class Telefone {
     long numero;
 
     //Este é um construtor padrão
-    Telefone() {};
+    Telefone() {}
     
     //Este é um construtor completo
     Telefone(int ddd, long numero) {

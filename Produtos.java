@@ -8,7 +8,7 @@ public class Produtos {
     private int qntComprada;
 
     //Este é um construtor padrão
-    Produtos(){}
+    Produtos() {}
     
     //Este é um construtor completo
     Produtos(long codigo, String nome, double valor, int qntEstoque, int quantComprada){
