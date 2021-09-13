@@ -4,7 +4,18 @@ public class Cliente {
     private String nome = "";
     private long telefone = 0;
     private String email = "";
-    private String endereço = "";
+    private String endereco = "";
+
+    //This is a Default Constructor
+    Cliente() {}
+    
+    //This is a Complete Constructor
+    Cliente(String nome, long telefone, String email, String endereco) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+    }
 
     //<- Nome ->
     public void setNome(String nome) {
@@ -32,9 +43,9 @@ public class Cliente {
 
     //<- Endereço ->
     public void setEndereço(String endereço) {
-        this.endereço = endereço;
+        this.endereco = endereço;
     }
     public String getEndereço() {
-        return endereço;
+        return endereco;
     }
 }

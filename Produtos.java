@@ -4,8 +4,20 @@ public class Produtos {
     private long codigo = 0;
     private String nome = "";
     private double valor = 0;
-    private int qntComprada = 0;
     private int qntEstoque = 0;
+    private int qntComprada = 0;
+
+    //This is a Default Constructor
+    Produtos(){}
+    
+    //This is a Complete Constructor
+    Produtos(long codigo, String nome, double valor, int qntEstoque, int quantComprada){
+        this.codigo = codigo;
+        this.nome = nome;
+        this.valor = valor;
+        this.qntEstoque = qntEstoque;
+        this.qntComprada = quantComprada;
+    }
 
     //<- Codigo ->
     public void setCodigo(long codigo) {
