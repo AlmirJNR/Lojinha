@@ -1,16 +1,16 @@
 package lojinha;
 
 public class Produtos {
-    private long codigo = 0;
-    private String nome = "";
-    private double valor = 0;
-    private int qntEstoque = 0;
-    private int qntComprada = 0;
+    private long codigo;
+    private String nome;
+    private double valor;
+    private int qntEstoque;
+    private int qntComprada;
 
-    //This is a Default Constructor
+    //Este é um construtor padrão
     Produtos(){}
     
-    //This is a Complete Constructor
+    //Este é um construtor completo
     Produtos(long codigo, String nome, double valor, int qntEstoque, int quantComprada){
         this.codigo = codigo;
         this.nome = nome;

@@ -6,16 +6,7 @@ import java.util.ArrayList;
 public class Venda {
     // -> Irá retornar os produtos comprados e o valor total da compra para o cliente
     protected static PrintStream processoVenda(ClienteFisico clienteX, ArrayList<ClienteFisico> listaClientes, Produtos mercadoriaX, ArrayList<Produtos> listaMercadorias){
-        long cpfCliente = clienteX.getCpf();
-        String nomeCliente = clienteX.getNome();
-        String emailCliente = clienteX.getEmail();
-        
-        String nomeMercadoria = mercadoriaX.getNome();
-        double valorMercadoria = mercadoriaX.getValor();
-        int quantComprada = mercadoriaX.getQntComprada();
-        int quantEstoqMercadoria = mercadoriaX.getQntEstoque();
-
-        if (mercadoriaX.getQntEstoque() - quantComprada > 0) {
+        if (mercadoriaX.getQntEstoque() - mercadoriaX.getQntComprada() > 0) {
             System.out.printf("%n%ncomprando...%n%n");
         }
         else{
@@ -24,10 +15,10 @@ public class Venda {
 
         // -> Informação visual para o cliente
         System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CPF: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
-        , nomeCliente, nomeMercadoria, valorMercadoria, cpfCliente, emailCliente);
+        , clienteX.getNome(), mercadoriaX.getNome(), mercadoriaX.getValor(), clienteX.getCpf(), clienteX.getEmail());
 
         // -> Retirando do estoque a unidade comprada
-        mercadoriaX.setQntEstoque(quantEstoqMercadoria - quantComprada);
+        mercadoriaX.setQntEstoque(mercadoriaX.getQntEstoque() - mercadoriaX.getQntComprada());
 
         // -> Adicionando comprador a lista de compradores do dia
         listaClientes.add(clienteX);

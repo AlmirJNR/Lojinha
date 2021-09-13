@@ -3,14 +3,14 @@ package lojinha;
 public class ClienteFisico extends Cliente{
     private long cpf = 0;
 
-    //This is a Default Constructor
+    //Este é um construtor padrão
     ClienteFisico(){
 
     }
     
-    //This is a Complete Constructor
-    ClienteFisico(String nome, long cpf, long telefone, String email, String endereço){
-        super(nome, telefone, email, endereço);
+    //Este é um construtor completo
+    ClienteFisico(String nome, long cpf, Telefone telefone, String email, Endereco endereco){
+        super(nome, telefone, email, endereco);
         this.cpf = cpf;
     }
 

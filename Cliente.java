@@ -1,16 +1,18 @@
 package lojinha;
 
 public class Cliente {
-    private String nome = "";
-    private long telefone = 0;
-    private String email = "";
-    private String endereco = "";
+    private String nome;
+    // private long telefone = 0;
+    private Telefone telefone;
+    private String email;
+    // private String endereco;
+    private Endereco endereco;
 
-    //This is a Default Constructor
+    //Este é um construtor padrão
     Cliente() {}
     
-    //This is a Complete Constructor
-    Cliente(String nome, long telefone, String email, String endereco) {
+    //Este é um construtor completo
+    Cliente(String nome, Telefone telefone, String email, Endereco endereco) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -25,11 +27,26 @@ public class Cliente {
         return nome;
     }
 
-    //<- Telefone ->
-    public void setTelefone(long telefone) {
-        this.telefone = telefone;
+    // //<- Telefone Atributo ->
+    // public void setTelefone(long telefone) {
+    //     this.telefone = telefone;
+    // }
+    // public long getTelefone() {
+    //     return telefone;
+    // }
+
+    //<- Telefone Classe ->
+    public void setTelefone(int telefoneDDD, long telefoneNumero) {
+        this.telefone.ddd = telefoneDDD;
+        this.telefone.numero = telefoneNumero;
     }
-    public long getTelefone() {
+    public long getTelefoneDDD() {
+        return telefone.getDDD();
+    }
+    public long getTelefoneNumero() {
+        return telefone.getNumero();
+    }
+    public Telefone getTelefoneDDDNumero() {
         return telefone;
     }
 
@@ -41,11 +58,54 @@ public class Cliente {
         return email;
     }
 
-    //<- Endereço ->
-    public void setEndereço(String endereço) {
-        this.endereco = endereço;
+    // //<- Endereço Atributo ->
+    // public void setEndereço(String endereço) {
+    //     this.endereco = endereço;
+    // }
+    // public String getEndereço() {
+    //     return endereco;
+    // }
+
+    // <- Endereço Classe ->
+    public void setEnderecoCasa(String enderecoPais, String enderecoEstado, String enderecoCidade, String enderecoBairro, String enderecoRua, int enderecoNumeroLogradouro) {
+        this.endereco.pais = enderecoPais;
+        this.endereco.estado = enderecoEstado;
+        this.endereco.cidade = enderecoCidade;
+        this.endereco.bairro = enderecoBairro;
+        this.endereco.rua = enderecoRua;
+        this.endereco.numeroLogradouro = enderecoNumeroLogradouro;
     }
-    public String getEndereço() {
+    public void setEnderecoApartamento(String enderecoPais, String enderecoEstado, String enderecoCidade, String enderecoBairro, String enderecoRua, int enderecoNumeroLogradouro, int enderecoNumeroApartamento) {
+        this.endereco.pais = enderecoPais;
+        this.endereco.estado = enderecoEstado;
+        this.endereco.cidade = enderecoCidade;
+        this.endereco.bairro = enderecoBairro;
+        this.endereco.rua = enderecoRua;
+        this.endereco.numeroLogradouro = enderecoNumeroLogradouro;
+        this.endereco.numeroApartamento = enderecoNumeroApartamento;
+    }
+    public String getEnderecoPais() {
+        return endereco.pais;
+    }
+    public String getEnderecoEstado() {
+        return endereco.estado;
+    }
+    public String getEnderecoCidade() {
+        return endereco.cidade;
+    }
+    public String getEnderecoBairro() {
+        return endereco.bairro;
+    }
+    public String getEnderecoRua() {
+        return endereco.rua;
+    }
+    public int getEnderecoNumeroLogradouro() {
+        return endereco.numeroLogradouro;
+    }
+    public int getEnderecoApartamento() {
+        return endereco.numeroApartamento;
+    }
+    public Endereco getEnderecoCompleto() {
         return endereco;
     }
 }

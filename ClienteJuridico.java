@@ -1,14 +1,14 @@
 package lojinha;
 
 public class ClienteJuridico extends Cliente{
-    private long cnpj = 0;
-    private String nomeFantasia = "";
+    private long cnpj;
+    private String nomeFantasia;
 
-    //This is a Default Constructor
+    //Este é um construtor padrão
     ClienteJuridico() {}
     
-    //This is a Complete Constructor
-    ClienteJuridico(String nome, String nomeFantasia, long cnpj, long telefone, String email, String endereco) {
+    //Este é um construtor completo
+    ClienteJuridico(String nome, String nomeFantasia, long cnpj, Telefone telefone, String email, Endereco endereco) {
         super(nome, telefone, email, endereco);
         this.nomeFantasia = nomeFantasia;
         this.cnpj = cnpj;
