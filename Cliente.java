@@ -1,6 +1,6 @@
 package lojinha;
 
-public class cliente {
+public class Cliente {
     private String nome = "";
     private long telefone = 0;
     private String email = "";

@@ -3,9 +3,9 @@ package lojinha;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-public class venda {
+public class Venda {
     // -> Irá retornar os produtos comprados e o valor total da compra para o cliente
-    protected static PrintStream Venda(cli_fis clienteX, ArrayList<cli_fis> listaClientes, produtos mercadoriaX, ArrayList<produtos> listaMercadorias){
+    protected static PrintStream processoVenda(ClienteFisico clienteX, ArrayList<ClienteFisico> listaClientes, Produtos mercadoriaX, ArrayList<Produtos> listaMercadorias){
         long cpfCliente = clienteX.getCpf();
         String nomeCliente = clienteX.getNome();
         String emailCliente = clienteX.getEmail();
@@ -39,7 +39,7 @@ public class venda {
     }
 
     // -> Irá retornar uma lista de vendas do dia
-    protected static void ListaVendas(ArrayList<cli_fis> listaClientes, ArrayList<produtos> listaMercadorias){
+    protected static void listaVendas(ArrayList<ClienteFisico> listaClientes, ArrayList<Produtos> listaMercadorias){
         // -> variável local para calculo de lucro do dia
         double lucroTotal = 0;
 

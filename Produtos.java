@@ -1,6 +1,6 @@
 package lojinha;
 
-public class produtos {
+public class Produtos {
     private long codigo = 0;
     private String nome = "";
     private double valor = 0;

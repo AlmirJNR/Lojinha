@@ -1,6 +1,6 @@
 package lojinha;
 
-public class cli_jur extends cliente{
+public class ClienteJuridico extends Cliente{
     private long cnpj = 0;
     private String nomeFantasia = "";
 

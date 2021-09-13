@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * app
  */
-public class app {
+public class App {
 
     public static void main(String[] args) {
         // -> Instânciando dois novos objetos da subclasse cli_fis
-        cli_fis comprador1 = new cli_fis();
-        cli_fis comprador2 = new cli_fis();
+        ClienteFisico comprador1 = new ClienteFisico();
+        ClienteFisico comprador2 = new ClienteFisico();
 
         // -> Atribuindo valores para instâncias de objetos de uma subclasse
         comprador1.setCpf(89523756183L);
@@ -29,8 +29,8 @@ public class app {
 
         // <-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-> //
         // -> Instânciando dois novos objetos da classe produtos
-        produtos mercadoria1 = new produtos();
-        produtos mercadoria2 = new produtos();
+        Produtos mercadoria1 = new Produtos();
+        Produtos mercadoria2 = new Produtos();
 
         // -> Atribuindo valores para instâncias de objetos de uma classe
         mercadoria1.setCodigo(574193628L);
@@ -47,26 +47,26 @@ public class app {
 
         // <-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-> //
         // -> Criando um arraylist de compradores
-        ArrayList<cli_fis> compradores = new ArrayList<>();
+        ArrayList<ClienteFisico> compradores = new ArrayList<>();
 
         // -> Criando um arraylist de mercadorias
-        ArrayList<produtos> itensVendidos = new ArrayList<>();
+        ArrayList<Produtos> itensVendidos = new ArrayList<>();
 
         // -> Simualação de Compra 1
-        venda.Venda(comprador1, compradores, mercadoria1, itensVendidos);
+        Venda.processoVenda(comprador1, compradores, mercadoria1, itensVendidos);
 
         // -> Adicionando os objetos para um ArrayList ==> Observe como se aplica dentro do método
         // compradores.add(comprador1);
         // itensVendidos.add(mercadoria1);
 
         // -> Simualação de Compra 2
-        venda.Venda(comprador2, compradores, mercadoria2, itensVendidos);
+        Venda.processoVenda(comprador2, compradores, mercadoria2, itensVendidos);
 
         // -> Adicionando os objetos para um ArrayList ==> Observe como se aplica dentro do método
         // compradores.add(comprador2);
         // itensVendidos.add(mercadoria2);
 
         // -> Mostrará uma lista de vendas efetuadas no final do dia
-        venda.ListaVendas(compradores, itensVendidos);
+        Venda.listaVendas(compradores, itensVendidos);
     }
 }

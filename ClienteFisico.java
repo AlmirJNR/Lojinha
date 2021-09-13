@@ -1,6 +1,6 @@
 package lojinha;
 
-public class cli_fis extends cliente{
+public class ClienteFisico extends Cliente{
     private long cpf = 0;
 
     //<- CPF ->
