@@ -1,3 +1,6 @@
+- Branch **main** estará sendo utilizada para atribuir toda a integração do código ao banco de dados do postgresql
+- Branch **old** irá manter todo o código legado utilizado antes da integração do código ao banco de dados do postgresql
+
 # Exercício
 
 Criar um programa para simular uma lojinha, com as seguintes classes: 
