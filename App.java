@@ -1,13 +1,24 @@
 package lojinha;
 
+import java.io.IOException;
+
+import java.sql.SQLException;
+
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import lojinha.bancoDeDados.Conexao;
 
 /**
  * app
  */
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, IOException {
+        // -> Verificando a conexão com o banco de dados
+        Conexao dataBaseConexao = new Conexao();
+        dataBaseConexao.getConexao();
         
         ArrayList<Cliente> clientesRegistrados = new ArrayList<Cliente>();
 
@@ -23,45 +34,44 @@ public class App {
         clientesRegistrados.add(comprador3);
         clientesRegistrados.add(comprador4);
 
-        System.out.println("!!== Lista de clientes registrados no banco ==!!\n");
-
         for (int i = 0; i < clientesRegistrados.size(); i++) {
             // -> Mostrando maneiras diferentes de se obter todos os dados de determinados clientes
-            System.out.println("Seu nome é: " + clientesRegistrados.get(i).getNome());
-
-            // -> Verificando se o cliente é Pessoa Fisica Ou Pessoa Jurídica
+            // -> Verificando se o cliente é Pessoa Fisica Ou Pessoa Jurídica -> PARTE 1
             if (clientesRegistrados.get(i) instanceof ClienteFisico) {
                 ClienteFisico clienteFisico = (ClienteFisico)clientesRegistrados.get(i);
-                System.out.println("Seu cpf é: " + clienteFisico.getCpf());
+                JOptionPane.showMessageDialog(null, 
+                    "Nome: " + clientesRegistrados.get(i).getNome() + "\n" +
+                    "Cpf: " + clienteFisico.getCpf() + "\n" +
+                    "DDD + Telefone: " + clientesRegistrados.get(i).getTelefoneDDDNumero().ddd +" "+clientesRegistrados.get(i).getTelefoneDDDNumero().numero + "\n" +
+                    // -> Mostrando maneiras diferentes de se obter um dado Endereço
+                    "País: " + clientesRegistrados.get(i).getEnderecoPais() + "\n" +
+                    "Estado: " + clientesRegistrados.get(i).getEnderecoEstado() + "\n" +
+                    "Cidade: " + clientesRegistrados.get(i).getEnderecoCidade() + "\n" +
+                    "Bairro: " + clientesRegistrados.get(i).getEnderecoRua() + "\n" +
+                    "Rua: " + clientesRegistrados.get(i).getEnderecoRua() + "\n" +
+                    "Logradouro: " + clientesRegistrados.get(i).getEnderecoNumeroLogradouro() + "\n" +
+                    // -> Verificando se a Pessoa Física possuí apartamento ou não
+                    (clientesRegistrados.get(i).getEnderecoApartamento() != 0 ? "Apartamento: " + clientesRegistrados.get(i).getEnderecoApartamento() : ""), 
+                    "Dados dos clientes", JOptionPane.INFORMATION_MESSAGE);
             }
+            // -> Verificando se o cliente é Pessoa Fisica Ou Pessoa Jurídica -> PARTE 2
             else if (clientesRegistrados.get(i) instanceof ClienteJuridico) {
                 ClienteJuridico clienteJuridico = (ClienteJuridico)clientesRegistrados.get(i);
-                System.out.println("Seu nome fantasia é: " + clienteJuridico.getNomeFantasia());
-                System.out.println("Seu cnpj é: " + clienteJuridico.getCnpj());
-            }
-
-            System.out.println("Seu DDD é: " + clientesRegistrados.get(i).getTelefoneDDD());
-            System.out.println("Seu número é: " + clientesRegistrados.get(i).getTelefoneNumero());
-            System.out.println("Seu DDD + número é: " + clientesRegistrados.get(i).getTelefoneDDDNumero().ddd + " " + comprador1.getTelefoneDDDNumero().numero);
-            
-            // -> Mostrando maneiras diferentes de se obter um dado Endereço utilizando classes e métodos
-            System.out.println("Seu país é: " + clientesRegistrados.get(i).getEnderecoPais());
-            System.out.println("Seu estado é: " + clientesRegistrados.get(i).getEnderecoEstado());
-            System.out.println("Sua cidade é: " + clientesRegistrados.get(i).getEnderecoCidade());
-            System.out.println("Seu bairro é: " + clientesRegistrados.get(i).getEnderecoBairro());
-            System.out.println("Sua rua é: " + clientesRegistrados.get(i).getEnderecoRua());
-            System.out.println("Seu número de logradouro é: " + clientesRegistrados.get(i).getEnderecoNumeroLogradouro());
-
-            if (clientesRegistrados.get(i).getEnderecoApartamento() != 0) {
-                System.out.println("Seu número de apartamento é: " + clientesRegistrados.get(i).getEnderecoApartamento());
-                System.out.println();
-            }
-            else {
-                System.out.println();
-            }
-
-            if (i == clientesRegistrados.size() - 1) {
-                System.out.println("!!== Final da lista de clientes registrados no banco ==!!");    
+                JOptionPane.showMessageDialog(null, 
+                    "Nome: " + clientesRegistrados.get(i).getNome() + "\n" +
+                    "Nome Fantasia: " + clienteJuridico.getNomeFantasia() + "\n" +
+                    "CNPJ: " + clienteJuridico.getCnpj() + "\n" +
+                    "DDD + Telefone: " + clientesRegistrados.get(i).getTelefoneDDDNumero().ddd +" "+clientesRegistrados.get(i).getTelefoneDDDNumero().numero + "\n" +
+                    // -> Mostrando maneiras diferentes de se obter um dado Endereço
+                    "País: " + clientesRegistrados.get(i).getEnderecoPais() + "\n" +
+                    "Estado: " + clientesRegistrados.get(i).getEnderecoEstado() + "\n" +
+                    "Cidade: " + clientesRegistrados.get(i).getEnderecoCidade() + "\n" +
+                    "Bairro: " + clientesRegistrados.get(i).getEnderecoRua() + "\n" +
+                    "Rua: " + clientesRegistrados.get(i).getEnderecoRua() + "\n" +
+                    "Logradouro: " + clientesRegistrados.get(i).getEnderecoNumeroLogradouro() + "\n" +
+                    // -> Verificando se a Pessoa Jurídica possuí apartamento ou não
+                    (clientesRegistrados.get(i).getEnderecoApartamento() != 0 ? "Apartamento: " + clientesRegistrados.get(i).getEnderecoApartamento() : ""), 
+                    "Dados dos clientes", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         // <-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-> //
@@ -91,5 +101,7 @@ public class App {
 
         // -> Mostrará uma lista de vendas efetuadas no final do dia
         Venda.listaVendas(compradores, itensVendidos);
+
+        dataBaseConexao.fecharConexao();
     }
 }

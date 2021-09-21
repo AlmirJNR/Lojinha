@@ -1,31 +1,34 @@
 package lojinha;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Venda {
     // -> Irá retornar os produtos comprados e o valor total da compra para o cliente
-    protected static PrintStream processoVenda(Cliente clienteX, ArrayList<Cliente> listaClientes, Produtos mercadoriaX, ArrayList<Produtos> listaMercadorias){
+    protected static boolean processoVenda(Cliente clienteX, ArrayList<Cliente> listaClientes, Produtos mercadoriaX, ArrayList<Produtos> listaMercadorias){
         
-        if (mercadoriaX.getQntEstoque() - mercadoriaX.getQntComprada() > 0) {
-            System.out.printf("%ncomprando...%n%n");
-        }
-        else {
-            return System.out.printf("indisponível no estoque");
+        if (mercadoriaX.getQntEstoque() - mercadoriaX.getQntComprada() <= 0) {
+            System.err.println("Erro: produto com quantidade final de estoque inferior ou igual a zero");
+            return false;
         }
 
-        // -> Informação visual para o cliente fisico
-        if (clienteX instanceof ClienteFisico) {
-            ClienteFisico clienteFisico = (ClienteFisico)clienteX;
-            System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CPF: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
-            , clienteX.getNome(), mercadoriaX.getNome(), mercadoriaX.getValor(), clienteFisico.getCpf(), clienteX.getEmail());
-        }
-        // -> Informação visual para o cliente juridico
-        else if (clienteX instanceof ClienteJuridico) {
-            ClienteJuridico clienteJuridico = (ClienteJuridico)clienteX;
-            System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CNPJ: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
-            , clienteX.getNome(), mercadoriaX.getNome(), mercadoriaX.getValor(), clienteJuridico.getCnpj(), clienteX.getEmail());
-        }
+        // // -> Informação visual para o cliente fisico
+        // if (clienteX instanceof ClienteFisico) {
+        //     ClienteFisico clienteFisico = (ClienteFisico)clienteX;
+        //     System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CPF: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
+        //     , clienteX.getNome(), mercadoriaX.getNome(), mercadoriaX.getValor(), clienteFisico.getCpf(), clienteX.getEmail());
+        // }
+        // // -> Informação visual para o cliente juridico
+        // else if (clienteX instanceof ClienteJuridico) {
+        //     ClienteJuridico clienteJuridico = (ClienteJuridico)clienteX;
+        //     System.out.printf("Você, %s, comprou %s, por um total de: R$%.2f%nSeu CNPJ: %d, será registrado na nota fiscal e será enviado para o email: %s%n"
+        //     , clienteX.getNome(), mercadoriaX.getNome(), mercadoriaX.getValor(), clienteJuridico.getCnpj(), clienteX.getEmail());
+        // }
 
         // -> Retirando do estoque a unidade comprada
         mercadoriaX.setQntEstoque(mercadoriaX.getQntEstoque() - mercadoriaX.getQntComprada());
@@ -36,37 +39,75 @@ public class Venda {
         // -> Adicionando itens vendidos a lista de vendas do dia
         listaMercadorias.add(mercadoriaX);
 
-        return System.out.printf("Obrigado e volte sempre%n");
+        System.out.println("Compra efetuada com sucesso");
+        return true;
     }
 
     // -> Irá retornar uma lista de vendas do dia
     protected static void listaVendas(ArrayList<Cliente> listaClientes, ArrayList<Produtos> listaMercadorias){
-        // -> variável local para calculo de lucro do dia
+        // -> Variável local para calculo de lucro do dia
         double lucroTotal = 0;
+        // -> Preparando o frame para relatório final
+        JFrame frame;
+        // -> Preparando a tabela para relatório final
+        JTable table;
+
+        // -> Inicialização do Frame
+        frame = new JFrame();
+        
+        // -> Nome das colunas
+        String[] nomeDasColunas = { "Cliente", "Produto", "Unidades Compradas", "Quantidade em Estoque", "Preco Unitario", "Lucro Total" };
+
+        // -> Criando a tabela
+        String[][] dadosDaTabela = new String[listaClientes.size()][nomeDasColunas.length];
 
         for (int i = 0; i < listaMercadorias.size(); i++) {
-            // -> Melhor formatação para a apresetação final dos dados
-            if (i < listaMercadorias.size()) {
-                System.out.println("");
-            }
-
-            System.out.printf("<-- Compra %d do dia -->%n", i+1);
-
-            // -> Mostrando qual cliente comprou qual produto e a quantidade de lucro fornecida
-            System.out.printf("O cliente " + listaClientes.get(i).getNome() + 
-            ", comprou %d unidades de: " + listaMercadorias.get(i).getNome() + "%nCom lucro de: %.2f", 
-            listaMercadorias.get(i).getQntComprada(), 
-            (listaMercadorias.get(i).getValor() * listaMercadorias.get(i).getQntComprada()));
-
-            // -> Melhor formatação para a apresetação final dos dados
-            if (i < listaMercadorias.size()) {
-                System.out.println("");
-            }
+            // -> Data para ser disponibilizado na tabela
+            dadosDaTabela[i] = new String[] {listaClientes.get(i).getNome(), listaMercadorias.get(i).getNome(), listaMercadorias.get(i).getQntComprada()+"", listaMercadorias.get(i).getQntEstoque()+"",String.format("R$%.2f", listaMercadorias.get(i).getValor()), (String.format("R$%.2f",listaMercadorias.get(i).getQntComprada() * listaMercadorias.get(i).getValor()))};
 
             // -> Realizando o lucro total para demonstar no final da lista
             lucroTotal += listaMercadorias.get(i).getValor() * listaMercadorias.get(i).getQntComprada();
         }
 
-        System.out.printf("%n%nO lucro do dia foi: %.2f", lucroTotal);
+        // -> Titulo do Frame
+        frame.setTitle(String.format("Relatorio de Vendas - Lucro Total R$%.2f", lucroTotal));
+
+        // -> Inicializando a tabela
+        table = new JTable(dadosDaTabela, nomeDasColunas) {
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                return false;
+            };
+        };
+        
+        // -> Alinhando os dados da tabela
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        // -> Produto
+        table.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        // -> Unidades Compradas
+        table.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+        // -> Quantiade em Estoque
+        table.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        // -> Preço Unitario
+        table.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
+        // -> Lucro Total
+        table.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+
+        // -> Definindo o tamanho da tabela (x, y, largura, altura)
+        table.setBounds(30, 40, 200, 300);
+        
+        // -> Inicializando o JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        // -> Adicionando ao JScrollPane
+        frame.add(scrollPane);
+
+        // -> Definindo o tamanho do frame (x, y, largura, altura)
+        frame.setSize(750, 200);
+
+        // -> Mostrando o frame
+        frame.setVisible(true);
+
+        // -> Fechando o frame
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
