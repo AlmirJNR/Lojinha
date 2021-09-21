@@ -39,7 +39,7 @@ public class Venda {
         // -> Adicionando itens vendidos a lista de vendas do dia
         listaMercadorias.add(mercadoriaX);
 
-        System.out.println("Compra efetuada com sucesso");
+        // System.out.println("Compra efetuada com sucesso");
         return true;
     }
 
