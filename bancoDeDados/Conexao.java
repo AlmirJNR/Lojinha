@@ -16,8 +16,8 @@ import java.sql.SQLException;
 public class Conexao {
     protected static String status = "Nao conectado...";
     
-    private static Connection conexao = null;
-    private static Statement statement;
+    public static Connection conexao = null;
+    public static Statement statement = null;
 
     private static String url; // URL completa do banco de dados
     private static String userName; // Nome de usuário
@@ -69,6 +69,15 @@ public class Conexao {
     public boolean fecharConexao() {
         try {
             conexao.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean fecharStatement() {
+        try {
+            statement.close();
             return true;
         } catch (Exception e) {
             return false;
